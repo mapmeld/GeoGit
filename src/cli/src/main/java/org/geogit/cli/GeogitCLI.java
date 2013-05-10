@@ -262,7 +262,7 @@ public class GeogitCLI {
         try {
             execute(args);
         } catch (Exception e) {
-            exitCode = -1;            
+            exitCode = -1;
             try {
                 if (e instanceof ParameterException) {
                     consoleReader.println(e.getMessage() + ". See geogit --help.");
