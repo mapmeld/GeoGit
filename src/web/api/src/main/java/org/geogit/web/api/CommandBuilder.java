@@ -128,7 +128,7 @@ public class CommandBuilder {
         command.setSince(options.getFirstValue("since"));
         command.setUntil(options.getFirstValue("until"));
         command.setPage(parseInt(options, "page", 0));
-        command.setElementsPerPage(parseInt(options, "show", 30));
+        command.setElementsPerPage(parseInt(options, "show", 3000));
         command.setFirstParentOnly(Boolean.valueOf(options
                 .getFirstValue("firstParentOnly", "false")));
         return command;
@@ -268,7 +268,7 @@ public class CommandBuilder {
         command.setDepth(parseInt(options, "depth", 0));
         command.setCommitId(options.getFirstValue("commitId", ObjectId.NULL.toString()));
         command.setPage(parseInt(options, "page", 0));
-        command.setElementsPerPage(parseInt(options, "show", 30));
+        command.setElementsPerPage(parseInt(options, "show", 3000));
         return command;
     }
 
