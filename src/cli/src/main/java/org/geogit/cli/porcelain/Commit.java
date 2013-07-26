@@ -18,6 +18,7 @@ import org.geogit.api.GeoGIT;
 import org.geogit.api.ObjectId;
 import org.geogit.api.RevCommit;
 import org.geogit.api.RevObject.TYPE;
+import org.geogit.api.plumbing.ParseTimestamp;
 import org.geogit.api.plumbing.ResolveObjectType;
 import org.geogit.api.plumbing.RevParse;
 import org.geogit.api.plumbing.diff.DiffEntry;
@@ -58,9 +59,9 @@ public class Commit extends AbstractCommand implements CLICommand {
 
     @Parameter(names = "-c", description = "Commit to reuse")
     private String commitToReuse;
-    
+
     @Parameter(names = "-t", description = "Commit timestamp")
-    private long commitTimestamp = 0L;
+    private String commitTimestamp;
 
     @Parameter(description = "<pathFilter>  [<paths_to_commit]...")
     private List<String> pathFilters = Lists.newLinkedList();
@@ -90,9 +91,12 @@ public class Commit extends AbstractCommand implements CLICommand {
         RevCommit commit;
         try {
             CommitOp commitOp = geogit.command(CommitOp.class).setMessage(message);
-            if (commitTimestamp != 0L) {
-                commitOp.setCommitterTimestamp( commitTimestamp );
+            if (commitTimestamp != null && !Strings.isNullOrEmpty(commitTimestamp)) {
+                Long millis = geogit.command(ParseTimestamp.class).setString(commitTimestamp)
+                        .call();
+                commitOp.setCommitterTimestamp(millis.longValue());
             }
+
             if (commitToReuse != null) {
                 Optional<ObjectId> commitId = geogit.command(RevParse.class)
                         .setRefSpec(commitToReuse).call();
