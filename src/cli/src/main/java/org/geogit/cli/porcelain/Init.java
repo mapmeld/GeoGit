@@ -93,7 +93,7 @@ public class Init extends AbstractCommand implements CLICommand {
                 message = "Initialized empty Geogit repository in "
                         + repoDirectory.getAbsolutePath();
             }
-            cli.getConsole().println(message);
+            //cli.getConsole().println(message);
 
         } catch (Exception e) {
             throw Throwables.propagate(e);

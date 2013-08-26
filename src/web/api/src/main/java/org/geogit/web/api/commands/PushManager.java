@@ -122,9 +122,6 @@ public class PushManager {
      * @param oid the id of the object
      */
     public void addObject(String ipAddress, ObjectId oid) {
-        // disabling push for the moment
-        throw new RuntimeException("Direct push to GeoGit repo is currently disabled on GeoGinger.");
-        /*
         
         if (incomingData.containsKey(ipAddress)) {
             incomingData.get(ipAddress).add(oid);
@@ -132,6 +129,5 @@ public class PushManager {
             throw new RuntimeException(
                     "Tried to push an object without first opening a connection.");
         }
-        */
     }
 }
