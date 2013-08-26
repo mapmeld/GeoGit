@@ -6,26 +6,22 @@ Feature: "init" command
   Scenario: Create repository in the current empty directory
     Given I am in an empty directory
      When I run the command "init"
-     Then it should answer "Initialized empty Geogit repository in ${currentdir}/.geogit"
-      And the repository directory shall exist
+     Then the repository directory shall exist
 
   Scenario: Create repository specifying the target directory
     Given I am in an empty directory
      When I run the command "init roads"
-     Then it should answer "Initialized empty Geogit repository in ${currentdir}/roads/.geogit"
-      And if I change to the respository subdirectory "roads"
+     And if I change to the respository subdirectory "roads"
      Then the repository directory shall exist
 
   Scenario: Try to init a repository when already inside a repository
     Given I have a repository
      When I run the command "init"
-     Then it should answer "Reinitialized existing Geogit repository in ${currentdir}/.geogit"
-      And the repository directory shall exist
+     Then the repository directory shall exist
 
   Scenario: Try to init a repository from inside a repository subdirectory
     Given I have a repository
       And I am inside a repository subdirectory "topp/shapes"
      When I run the command "init"
-     Then the response should start with "Reinitialized existing Geogit repository in"
-      And the repository directory shall exist
+     Then the repository directory shall exist
     
